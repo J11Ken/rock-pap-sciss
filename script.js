@@ -11,9 +11,6 @@ announceWinner(playerScore, computerScore);
 console.log(playerScore);
 console.log(computerScore);
 
-
-
-
 //playerSelection Function
 function getPlayerSelection(){
   let playerSelection = prompt('Rock, Paper, Scissors?');
@@ -61,7 +58,7 @@ function game(){
   }
 }
 
-//function that announces a winner by checkig scores.
+//function that announces a winner by checking scores.
 function announceWinner(playerScore, computerScore){
   if (playerScore > computerScore){
     console.log('Congratulations, You Win!')
