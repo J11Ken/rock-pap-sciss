@@ -1,1 +1,1 @@
-# rock-pap-sciss
+# rock-pap-sciss game
