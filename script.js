@@ -1,69 +1,74 @@
 const myArray = ['rock', 'paper', 'scissors'];
 
-let playerSelection = getPlayerSelection().toLowerCase();
-let computerSelection = getComputerSelection().toLowerCase();
-
 let playerScore = 0;
 let computerScore = 0;
+let draws = 0;
 
-game();
-announceWinner(playerScore, computerScore);
-console.log(playerScore);
-console.log(computerScore);
+const buttons = document.querySelectorAll('.btn');
 
-//playerSelection Function
-function getPlayerSelection(){
-  let playerSelection = prompt('Rock, Paper, Scissors?');
-  return playerSelection;
+buttons.forEach(button => {
+  button.addEventListener('click', e =>{
+    playRound(e.target.textContent.toLowerCase(), getComputerSelection());
+    scoreUpdate();
+    scoreAnnouncer(playerScore, computerScore);
+  }
+  );
+});
+
+
+let play = document.getElementById("player");
+let com = document.getElementById("cpu");
+let drw = document.getElementById("draws");
+let announcement = document.createElement('p');
+
+play.textContent = `Player Score : ${playerScore}`;
+com.textContent = `Computer Score : ${computerScore}`;
+drw.textContent = `Draws : ${draws}`;
+
+announcement.textContent = 'And the winner is:';
+document.body.appendChild(announcement);
+
+
+//Function that updates the score after each game
+function scoreUpdate(){
+    play.textContent = `Player Score : ${playerScore}`;
+    cpu.textContent = `Computer Score : ${computerScore}`;
+    drw.textContent = `Draws : ${draws}`;
 }
+
+
+//Function that accounces winner when someone reaches 5 points
+function scoreAnnouncer(playerScore, computerScore){
+  if (playerScore == 5){
+    announcement.textContent = 'And the winner is: You! Well done!'
+  } else if (computerScore == 5){
+    announcement.textContent = 'And the winner is: Computer! Unlucky!'
+  } };
+
 
 //computerSelection Function
 function getComputerSelection(){
   let computerSelection = myArray[Math.floor(Math.random() * myArray.length)];
   return computerSelection;
-}
+};
 
-//playRound Function
+
+//playRound function 
 function playRound(playerSelection,  computerSelection){
   if (playerSelection == computerSelection) {
-    return 'draw'
+    draws += 1;
   } else if (playerSelection == 'rock' && computerSelection == 'scissors'){
     playerScore += 1;
-    return 'win'
   }else if (playerSelection == 'paper' && computerSelection == 'rock'){
     playerScore += 1;
-    return 'win'
   }else if (playerSelection == 'scissors' && computerSelection == 'paper'){
     playerScore += 1;
-    return 'win'
   }else if (playerSelection == 'rock' && computerSelection == 'paper'){
     computerScore += 1;
-    return 'lose'
   }else if (playerSelection == 'paper' && computerSelection == 'scissors'){
     computerScore += 1;
-    return 'lose'
   }else if (playerSelection == 'scissors' && computerSelection == 'rock'){
     computerScore += 1;
-    return 'lose'
-  }
-  }
-  
-
-//game Function that plays 5 rounds and adds wins onto each player
-function game(){
-  for (g=0; g < 5; g++) {
-    let playerSelection = getPlayerSelection().toLowerCase();
-    let computerSelection = getComputerSelection().toLowerCase();
-    console.log(playRound(playerSelection, computerSelection));
-  }
-}
-
-//function that announces a winner by checking scores.
-function announceWinner(playerScore, computerScore){
-  if (playerScore > computerScore){
-    console.log('Congratulations, You Win!')
-  } else if (playerScore < computerScore){
-    console.log('Sorry, You Lost This Time!')
-  }
-}
+  };
+  };
 
